@@ -21,6 +21,9 @@ export const BlueprintForm = ({
     if (initialData) {
       setName(initialData.name);
       setFields(initialData.fields);
+    } else {
+      setName("");
+      setFields([]);
     }
   }, [initialData]);
 

@@ -18,6 +18,7 @@ export const FieldRow = ({
         onChange={(e) =>
           onChange({ ...field, type: e.target.value as FieldType })
         }
+        disabled={viewOnly === true}
       >
         <option value="TEXT">Text</option>
         <option value="DATE">Date</option>
@@ -29,9 +30,10 @@ export const FieldRow = ({
         placeholder="Label"
         value={field.label}
         onChange={(e) => onChange({ ...field, label: e.target.value })}
+        disabled={viewOnly === true}
       />
 
-      {viewOnly == false && <button onClick={onRemove}>X</button>}
+      {viewOnly === false && <button onClick={onRemove}>X</button>}
     </div>
   );
 };
