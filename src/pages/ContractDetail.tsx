@@ -30,32 +30,34 @@ export const ContractDetail = () => {
   return (
     <div style={{ padding: 16 }}>
       <h2>{contract.name}</h2>
+      <div className="flex-layout">
+        <div>
+          {contract.fields.map((f, i) => (
+            <FieldRenderer
+              key={i}
+              field={f}
+              disabled={["LOCKED", "REVOKED"].includes(contract.status)}
+              onChange={(val) => {
+                const copy = [...contract.fields];
+                copy[i].value = val;
+                setContract({ ...contract, fields: copy });
+              }}
+            />
+          ))}
 
-      <StatusTimeline current={contract.status} />
-      <StatusActions contract={contract} onUpdate={setContract} />
-
-      <hr />
-
-      {contract.fields.map((f, i) => (
-        <FieldRenderer
-          key={i}
-          field={f}
-          disabled={["LOCKED", "REVOKED"].includes(contract.status)}
-          onChange={(val) => {
-            const copy = [...contract.fields];
-            copy[i].value = val;
-            setContract({ ...contract, fields: copy });
-          }}
-        />
-      ))}
-
-      <br />
-      <button
-        onClick={save}
-        disabled={["LOCKED", "REVOKED"].includes(contract.status)}
-      >
-        Save Fields
-      </button>
+          <br />
+          <button
+            onClick={save}
+            disabled={["LOCKED", "REVOKED"].includes(contract.status)}
+          >
+            Save Fields
+          </button>
+        </div>
+        <div>
+          <StatusTimeline current={contract.status} />
+          <StatusActions contract={contract} onUpdate={setContract} />
+        </div>
+      </div>
     </div>
   );
 };

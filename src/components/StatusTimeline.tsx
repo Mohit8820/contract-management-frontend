@@ -6,7 +6,7 @@ export const StatusTimeline = ({ current }: { current: string }) => {
   return (
     <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>
       {steps.map((s, i) => (
-        <div key={s} style={{ textAlign: "center" }}>
+        <div key={s} className="action-status">
           <div
             style={{
               width: 30,

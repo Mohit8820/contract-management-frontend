@@ -7,10 +7,12 @@ export const BlueprintForm = ({
   initialData,
   onSubmit,
   onCancel,
+  viewOnly,
 }: {
   initialData: Blueprint | null;
   onSubmit: (data: any) => Promise<void>;
   onCancel: () => void;
+  viewOnly: Boolean;
 }) => {
   const [name, setName] = useState(initialData?.name || "");
   const [fields, setFields] = useState(initialData?.fields || []);
@@ -32,11 +34,12 @@ export const BlueprintForm = ({
         placeholder="Blueprint name"
       />
 
-      <FieldBuilder fields={fields} setFields={setFields} />
-
-      <button onClick={() => onSubmit({ name, fields })}>
-        {initialData ? "Update" : "Create"}
-      </button>
+      <FieldBuilder fields={fields} setFields={setFields} viewOnly={viewOnly} />
+      {!viewOnly && (
+        <button onClick={() => onSubmit({ name, fields })}>
+          {initialData ? "Update" : "Create"}
+        </button>
+      )}
 
       {initialData && <button onClick={onCancel}>Cancel</button>}
     </div>

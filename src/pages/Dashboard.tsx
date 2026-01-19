@@ -23,32 +23,34 @@ export const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
-      <table border={1} cellPadding={8}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Blueprint</th>
-            <th>Status</th>
-            <th>Created Date</th>
-            <th>View</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contracts.map((c) => (
-            <tr key={c.id}>
-              <td>{c.name}</td>
-              <td>{c.blueprintName}</td>
-              <td>{c.status}</td>
-              <td>{formatDate(new Date(c.createdDate))}</td>
-              <td>
-                <button onClick={() => navigate(`/contracts/${c.id}`)}>
-                  Open
-                </button>
-              </td>
+      <div className="table-container">
+        <table id="contracts-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Blueprint</th>
+              <th>Status</th>
+              <th>Created Date</th>
+              <th>View</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {contracts.map((c) => (
+              <tr key={c.id}>
+                <td>{c.name}</td>
+                <td>{c.blueprintName}</td>
+                <td>{c.status}</td>
+                <td>{formatDate(new Date(c.createdDate))}</td>
+                <td>
+                  <button onClick={() => navigate(`/contracts/${c.id}`)}>
+                    Open
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

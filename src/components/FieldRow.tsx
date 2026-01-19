@@ -4,10 +4,12 @@ export const FieldRow = ({
   field,
   onChange,
   onRemove,
+  viewOnly,
 }: {
   field: BlueprintField;
   onChange: (v: BlueprintField) => void;
   onRemove: () => void;
+  viewOnly: Boolean | null;
 }) => {
   return (
     <div style={{ display: "flex", gap: 8 }}>
@@ -29,7 +31,7 @@ export const FieldRow = ({
         onChange={(e) => onChange({ ...field, label: e.target.value })}
       />
 
-      <button onClick={onRemove}>X</button>
+      {viewOnly == false && <button onClick={onRemove}>X</button>}
     </div>
   );
 };

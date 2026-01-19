@@ -5,9 +5,11 @@ import { Dispatch, SetStateAction } from "react";
 export const FieldBuilder = ({
   fields,
   setFields,
+  viewOnly,
 }: {
   fields: BlueprintField[];
   setFields: Dispatch<SetStateAction<BlueprintField[]>>;
+  viewOnly: Boolean | null;
 }) => {
   const addField = () => {
     setFields([
@@ -41,10 +43,10 @@ export const FieldBuilder = ({
           field={f}
           onChange={(v: BlueprintField) => update(i, v)}
           onRemove={() => remove(i)}
+          viewOnly={viewOnly}
         />
       ))}
-
-      <button onClick={addField}>Add Field</button>
+      {viewOnly == false && <button onClick={addField}>Add Field</button>}
     </div>
   );
 };
