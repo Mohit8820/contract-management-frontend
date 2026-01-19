@@ -1,46 +1,98 @@
-# Getting Started with Create React App
+# Contract Management Platform (Frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# contract-management-frontend
 
-## Available Scripts
+A simple contract management system built using the MERN stack that allows users to create reusable contract blueprints, generate contracts from them, and manage contract lifecycle with role-based actions (Approver vs Signer).
 
-In the project directory, you can run:
+For backend refer to - https://github.com/Mohit8820/contract-management-backend/blob/main/README.md
 
-### `npm start`
+# Setup Instructions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+install these globally
+Node.js (v18+ recommended)
+npm
 
-### `npm test`
+## Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+download this repository as zip and extract it or clone it from the given link -https://github.com/Mohit8820/contract-management-frontend.git
+open this folder - "contract-management-frontend" (in terminal : cd contract-management-frontend)
 
-### `npm run build`
+Create a ".env" file inside contract-management-frontend/:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+and add your environment variables in this file as-
+REACT_APP_API_URL=http://localhost:4000/api
+this will help fronend call the backend running at port 4000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run below commands-
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm install
+npm start
 
-### `npm run eject`
+Frontend will start at: http://localhost:3000
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Frontend Architecture
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## High-Level Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+src/
+├── components/ → Reusable UI building blocks
+├── pages/ → Route-level screens
+├── api.ts → Backend communication layer
+├── types.ts → Centralized TypeScript models
+├── App.tsx → App shell
+├── AllRoutes.tsx → Route definitions
+├── index.tsx → React bootstrap
+└── index.css → Global styles
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Components Layer (src/components/)
 
-## Learn More
+Purpose:
+Reusable, stateless or minimally stateful UI components.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+components/
+├── BlueprintForm.tsx
+├── FieldBuilder.tsx
+├── FieldRenderer.tsx
+├── FieldRow.tsx
+├── Header.tsx
+├── StatusActions.tsx
+└── StatusTimeline.tsx
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Responsibilities
+BlueprintForm : Create/edit blueprints
+FieldBuilder : Add/remove blueprint fields
+FieldRow : Single field row UI
+FieldRenderer : Render contract fields dynamically
+StatusActions : Role-based status buttons
+StatusTimeline : Visual lifecycle progress
+Header : App navigation
+
+## Pages Layer (src/pages/)
+
+Purpose:
+Route-level containers responsible for data fetching, state, and business flow.
+
+pages/
+├── Blueprints.tsx
+├── Dashboard.tsx
+├── ContractDetail.tsx
+└── AllRoutes.tsx
+
+Responsibilities
+Page : Responsibility
+Dashboard : List contracts
+Blueprints : Manage blueprints
+ContractDetail : Contract editing & lifecycle
+AllRoutes : Route mapping
+
+## Role-Based Behavior
+
+Since authentication was not required, the role is selected when opening a contract.
+Role selection is stored in sessionStorage
+
+# Assumptions
+
+Authentication is out of scope
+Signature is represented as typed text

@@ -1,7 +1,7 @@
 import { Blueprint } from "./types";
 import { Contract } from "./types";
 
-const BASE_URL = "http://localhost:4000/api";
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 export const api = {
   //BLUEPRINT APIs (BACKEND)
