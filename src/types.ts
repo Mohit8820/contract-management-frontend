@@ -10,6 +10,7 @@ export type Contract = {
   name: string;
   blueprintName: string;
   status: string;
+  createdDate: Date;
   fields: ContractField[];
 };
 

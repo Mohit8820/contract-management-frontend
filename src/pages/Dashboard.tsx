@@ -11,6 +11,15 @@ export const Dashboard = () => {
     api.getContracts().then(setContracts);
   }, []);
 
+  console.log(contracts);
+
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+
   return (
     <div>
       <h2>Dashboard</h2>
@@ -20,6 +29,7 @@ export const Dashboard = () => {
             <th>Name</th>
             <th>Blueprint</th>
             <th>Status</th>
+            <th>Created Date</th>
             <th>View</th>
           </tr>
         </thead>
@@ -29,6 +39,7 @@ export const Dashboard = () => {
               <td>{c.name}</td>
               <td>{c.blueprintName}</td>
               <td>{c.status}</td>
+              <td>{formatDate(new Date(c.createdDate))}</td>
               <td>
                 <button onClick={() => navigate(`/contracts/${c.id}`)}>
                   Open
