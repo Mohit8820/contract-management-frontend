@@ -50,7 +50,12 @@ export const ContractDetail = () => {
       ))}
 
       <br />
-      <button onClick={save}>Save Fields</button>
+      <button
+        onClick={save}
+        disabled={["LOCKED", "REVOKED"].includes(contract.status)}
+      >
+        Save Fields
+      </button>
     </div>
   );
 };

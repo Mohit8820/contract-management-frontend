@@ -1,6 +1,6 @@
 export type ContractField = {
   id: string;
-  type: "TEXT" | "DATE" | "SIGNATURE" | "CHECKBOX";
+  type: FieldType;
   label: string;
   value: any;
 };
@@ -15,7 +15,7 @@ export type Contract = {
 
 export type BlueprintField = {
   id: string;
-  type: "TEXT" | "DATE" | "SIGNATURE" | "CHECKBOX";
+  type: FieldType;
   label: string;
   position: { x: number; y: number };
 };
@@ -27,3 +27,5 @@ export type Blueprint = {
 };
 
 export type UserRole = "APPROVER" | "SIGNER";
+
+export type FieldType = "TEXT" | "DATE" | "SIGNATURE" | "CHECKBOX";

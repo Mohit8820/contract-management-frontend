@@ -1,5 +1,4 @@
-import { BlueprintField } from "../types";
-type FieldType = "TEXT" | "DATE" | "SIGNATURE" | "CHECKBOX";
+import { BlueprintField, FieldType } from "../types";
 
 export const FieldRow = ({
   field,
