@@ -48,7 +48,7 @@ html {
 }
 
 #root {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,10 +83,10 @@ h2 {
   border-radius: 10px;
 }
 
-#contracts-table {
+#table {
   border-collapse: collapse;
 }
-#contracts-table th {
+#table th {
   padding: 1rem;
   padding-left: 2vw;
   padding-right: 2vw;
@@ -94,8 +94,8 @@ h2 {
   color: white;
 }
 
-#contracts-table td {
-  padding: 1rem;
+#table td {
+  padding: 0.5rem;
   padding-left: 2vw;
   padding-right: 2vw;
 }
@@ -108,6 +108,13 @@ button {
   border-radius: 7px;
   margin: 0.2rem;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .flex-layout {
   display: flex;
   flex-wrap: wrap;
@@ -116,23 +123,16 @@ button {
   gap: 4rem;
 }
 
-.list li {
-  display: flex;
-  padding: 0.5rem;
-  margin-bottom: -0.5rem;
-  gap: 1rem;
-  justify-content: end;
-}
-
-.list li strong {
-  width: fit-content;
-  margin-right: 2rem;
-}
-
 .action-status {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
   gap: 1rem;
 }

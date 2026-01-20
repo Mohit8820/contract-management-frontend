@@ -2,6 +2,7 @@ export type ContractField = {
   id: string;
   type: FieldType;
   label: string;
+  position: { x: number; y: number };
   value: any;
 };
 

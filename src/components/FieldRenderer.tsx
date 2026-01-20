@@ -10,7 +10,13 @@ export const FieldRenderer = ({
   disabled: boolean;
 }) => {
   return (
-    <div style={{ marginBottom: 12 }}>
+    <div
+      style={{
+        marginBottom: 12,
+        gridColumn: field.position.x,
+        gridRow: field.position.y,
+      }}
+    >
       <label>{field.label}</label>
       <br />
 

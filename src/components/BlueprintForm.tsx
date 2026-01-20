@@ -39,7 +39,10 @@ export const BlueprintForm = ({
 
       <FieldBuilder fields={fields} setFields={setFields} viewOnly={viewOnly} />
       {!viewOnly && (
-        <button onClick={() => onSubmit({ name, fields })}>
+        <button
+          onClick={() => onSubmit({ name, fields })}
+          disabled={fields.length === 0}
+        >
           {initialData ? "Update" : "Create"}
         </button>
       )}

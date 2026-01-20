@@ -4,6 +4,8 @@ import { Blueprint } from "../types";
 import { BlueprintForm } from "../components/BlueprintForm";
 import { api } from "../api";
 
+import TableComponent from "../components/TableComponent";
+
 export const Blueprints = () => {
   const [blueprints, setBlueprints] = useState<Blueprint[]>([]);
   const [editing, setEditing] = useState<Blueprint | null>(null);
@@ -43,34 +45,38 @@ export const Blueprints = () => {
     <div>
       <h2>Blueprints</h2>
       <div className="flex-layout">
-        <ul className="list">
+        <TableComponent heading={["Blueprint", "Actions"]}>
           {blueprints.map((bp) => {
             return (
-              <li key={bp.id}>
-                <strong>{bp.name}</strong> ({bp.fields.length} fields)
-                <button
-                  onClick={() => {
-                    setViewing(true);
-                    setEditing(bp);
-                  }}
-                >
-                  View
-                </button>
-                <button
-                  onClick={() => {
-                    setViewing(false);
-                    setEditing(bp);
-                  }}
-                >
-                  Edit
-                </button>
-                <button onClick={() => createContract(bp)}>
-                  Create Contract
-                </button>
-              </li>
+              <tr key={bp.id}>
+                <td>
+                  <strong>{bp.name}</strong> ({bp.fields.length} fields)
+                </td>
+                <td>
+                  <button
+                    onClick={() => {
+                      setViewing(true);
+                      setEditing(bp);
+                    }}
+                  >
+                    View
+                  </button>
+                  <button
+                    onClick={() => {
+                      setViewing(false);
+                      setEditing(bp);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => createContract(bp)}>
+                    Create Contract
+                  </button>
+                </td>
+              </tr>
             );
           })}
-        </ul>
+        </TableComponent>
 
         <BlueprintForm
           initialData={editing}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { Contract } from "../types";
+import TableComponent from "../components/TableComponent";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -23,34 +24,23 @@ export const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
-      <div className="table-container">
-        <table id="contracts-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Blueprint</th>
-              <th>Status</th>
-              <th>Created Date</th>
-              <th>View</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contracts.map((c) => (
-              <tr key={c.id}>
-                <td>{c.name}</td>
-                <td>{c.blueprintName}</td>
-                <td>{c.status}</td>
-                <td>{formatDate(new Date(c.createdDate))}</td>
-                <td>
-                  <button onClick={() => navigate(`/contracts/${c.id}`)}>
-                    Open
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <TableComponent
+        heading={["Name", "Blueprint", "Status", "Created Date", "View"]}
+      >
+        {contracts.map((c) => (
+          <tr key={c.id}>
+            <td>{c.name}</td>
+            <td>{c.blueprintName}</td>
+            <td>{c.status}</td>
+            <td>{formatDate(new Date(c.createdDate))}</td>
+            <td>
+              <button onClick={() => navigate(`/contracts/${c.id}`)}>
+                Open
+              </button>
+            </td>
+          </tr>
+        ))}
+      </TableComponent>
     </div>
   );
 };

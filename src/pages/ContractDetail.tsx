@@ -26,24 +26,26 @@ export const ContractDetail = () => {
     setContract({ ...updated });
     alert("Saved");
   };
-
+  console.log(contract);
   return (
     <div style={{ padding: 16 }}>
       <h2>{contract.name}</h2>
       <div className="flex-layout">
         <div>
-          {contract.fields.map((f, i) => (
-            <FieldRenderer
-              key={i}
-              field={f}
-              disabled={["LOCKED", "REVOKED"].includes(contract.status)}
-              onChange={(val) => {
-                const copy = [...contract.fields];
-                copy[i].value = val;
-                setContract({ ...contract, fields: copy });
-              }}
-            />
-          ))}
+          <div className="grid-container">
+            {contract.fields.map((f, i) => (
+              <FieldRenderer
+                key={i}
+                field={f}
+                disabled={["LOCKED", "REVOKED"].includes(contract.status)}
+                onChange={(val) => {
+                  const copy = [...contract.fields];
+                  copy[i].value = val;
+                  setContract({ ...contract, fields: copy });
+                }}
+              />
+            ))}
+          </div>
 
           <br />
           <button

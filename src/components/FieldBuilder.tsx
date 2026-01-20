@@ -1,6 +1,8 @@
-import { FieldRow } from "./FieldRow";
+import { FieldType } from "../types";
 import { BlueprintField } from "../types";
 import { Dispatch, SetStateAction } from "react";
+
+import TableComponent from "./TableComponent";
 
 export const FieldBuilder = ({
   fields,
@@ -18,7 +20,7 @@ export const FieldBuilder = ({
         id: String(Math.random),
         type: "TEXT",
         label: "",
-        position: { x: 0, y: fields.length },
+        position: { x: 1, y: fields.length + 1 },
       },
     ]);
   };
@@ -36,16 +38,86 @@ export const FieldBuilder = ({
   return (
     <div>
       <h4>Fields</h4>
-
-      {fields.map((f, i) => (
-        <FieldRow
-          key={i}
-          field={f}
-          onChange={(v: BlueprintField) => update(i, v)}
-          onRemove={() => remove(i)}
-          viewOnly={viewOnly}
-        />
-      ))}
+      <TableComponent
+        heading={[
+          "Field Type",
+          "Label",
+          "Row Position",
+          "Column Position",
+          viewOnly == false ? "Remove" : "",
+        ]}
+      >
+        {fields.map((field, i) => (
+          <tr key={i}>
+            <td>
+              <select
+                value={field.type}
+                onChange={(e) =>
+                  update(i, { ...field, type: e.target.value as FieldType })
+                }
+                disabled={viewOnly === true}
+              >
+                <option value="TEXT">Text</option>
+                <option value="DATE">Date</option>
+                <option value="SIGNATURE">Signature</option>
+                <option value="CHECKBOX">Checkbox</option>
+              </select>
+            </td>
+            <td>
+              <input
+                placeholder="Label"
+                value={field.label}
+                onChange={(e) => update(i, { ...field, label: e.target.value })}
+                disabled={viewOnly === true}
+              />
+            </td>
+            <td>
+              <input
+                placeholder="Row"
+                type="number"
+                min={1}
+                value={field.position.y}
+                style={{ width: "3rem" }}
+                onChange={(e) =>
+                  update(i, {
+                    ...field,
+                    position: {
+                      ...field.position,
+                      y: Number(e.target.value),
+                    },
+                  })
+                }
+                disabled={viewOnly === true}
+              />
+            </td>
+            <td>
+              <input
+                placeholder="Column"
+                type="number"
+                min={1}
+                max={3}
+                style={{ width: "3rem" }}
+                value={field.position.x}
+                onChange={(e) =>
+                  update(i, {
+                    ...field,
+                    position: {
+                      ...field.position,
+                      x: Number(e.target.value),
+                    },
+                  })
+                }
+                disabled={viewOnly === true}
+              />
+            </td>
+            <td>
+              {viewOnly === false && (
+                <button onClick={() => remove(i)}>X</button>
+              )}
+            </td>
+          </tr>
+        ))}
+      </TableComponent>
       {viewOnly == false && <button onClick={addField}>Add Field</button>}
     </div>
   );
